@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
+import dj_database_url
+import os
 from datetime import timedelta
 from pathlib import Path
 
@@ -25,7 +27,7 @@ SECRET_KEY = "django-insecure-%v$t7-%5!wvuhnb694ylh^)46ly1=oy=7#(ule1v%wh$bjq@-k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -77,14 +80,10 @@ WSGI_APPLICATION = "whos_posting.wsgi.application"
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'whos_posting_db',
-        'USER': 'postgres',
-        'PASSWORD': 'ja130405',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        default='postgresql://postgres:ja130405@127.0.0.1:5432/whos_posting_db',
+        conn_max_age=600
+    )
 }
 
 
@@ -151,3 +150,5 @@ MEDIA_URL = "/media/"
 import os
 from pathlib import Path
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
