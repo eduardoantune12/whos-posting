@@ -6,8 +6,8 @@ Bem-vindo ao **Who's Posting**! Este é um projeto Full-Stack desenvolvido como 
 
 ## 🚀 Links de Deploy (Produção)
 
-- **Frontend (Aplicação Live):** [Link do Vercel - Será adicionado em breve]
-- **Backend (API):** [Link do Render - Será adicionado em breve]
+- **Frontend (Aplicação Live):** https://whos-posting.vercel.app/
+- **Backend (API):** https://whos-posting-api.onrender.com
 
 ---
 
