@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://whos-posting-api.onrender.com/api/',
+    baseURL: 'https://whos-posting-api.onrender.com/api/',
 });
 
 api.interceptors.request.use(async (config) => {
