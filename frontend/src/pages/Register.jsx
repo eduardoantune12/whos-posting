@@ -11,15 +11,13 @@ function Register() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setError('');
-
     try {
       await api.post('register/', { username, email, password });
-      alert('Conta criada com sucesso! Faça o login.');
-      navigate('/login'); // Redireciona para o login
-    } catch (err) {
-      console.error("Erro ao registrar:", err);
-      setError('Erro ao criar conta. O usuário pode já existir.');
+      navigate('/login'); // Redireciona silenciosamente para o login
+    } catch (error) {
+      console.error("Erro ao registrar:", error);
+      // Agora o erro aparece na tela para o usuário ver!
+      setError("Erro ao criar conta. O usuário ou e-mail pode já existir.");
     }
   };
 
@@ -36,6 +34,7 @@ function Register() {
           className="block w-full border p-2 mb-2 rounded"
           onChange={(e) => setUsername(e.target.value)}
           required
+          autoComplete="username"
         />
         <input
           type="email"
@@ -43,6 +42,7 @@ function Register() {
           className="block w-full border p-2 mb-2 rounded"
           onChange={(e) => setEmail(e.target.value)}
           required
+          autoComplete="email"
         />
         <input
           type="password"
@@ -51,6 +51,7 @@ function Register() {
           onChange={(e) => setPassword(e.target.value)}
           required
           minLength="6"
+          autoComplete="new-password" // Resolve o aviso amarelo do console
         />
 
         <button type="submit" className="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4">
